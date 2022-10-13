@@ -14,10 +14,34 @@ Hint: For subsets([1, 2, 3]), there are two kinds of subsets:
      subset that is the same, except it also does contain 3.
 ***********************************************************************/
 
-const subsets = (arr) => {
-  // Your code here
+const subsets = (arr, newArr = [[]]) => {
+  if (!arr.length) return newArr;
+
+  arr.forEach((el) => {
+    if (Array.isArray(el)) {
+      newArr.push(subsets(arr.slice(0, arr.length - 1)))
+    }
+  })
+
+
+
+
+  // if (arr.length === 1) {
+  //   newArr.push(arr);
+  // }
+
+  // let first = arr[0];
+  // if (arr.length > 1) {
+  //   newArr.push(first)
+  //   return subsets(arr.slice(0, arr.length - 1))
+  // }
+  // return newArr;
 }
 
+console.log(subsets([])) // [[]]
+console.log(subsets([1])) // [[], [1]]
+console.log(subsets([1, 2])) // [[], [1], [2], [1, 2]]
+// console.log(subsets([1, 2, 3]) // [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
   module.exports = subsets;

@@ -20,10 +20,44 @@ sort([4,1,6,3,1,7]); // [1, 1, 3, 4, 6, 7]
 sort([0, 1, -3]); // [-3, 0, 1]
 sort([]); // []
 ***********************************************************************/
-
+// 1. takes an array of int, 'nums'
+// 2. returns an array containing those ints sorted from least to greatest
 function sort(nums, sorted = []) {
-    // Your code here
+    if (!nums.length) return sorted;
+    let smallest = nums[0]
+    let min = 0
+    sorted = nums.filter((el, i) => {
+        if (el < nums[min]) {
+            min = i;
+            smallest = el;
+        }
+    })
+    sorted.push(smallest)
+    nums.splice(min, 1)
+    return sort(nums, sorted)
 }
+
+// function sort(nums, sorted = []) {
+//     debugger
+//     if (!nums.length) return sorted;
+//     let min = 0;
+//     debugger
+//     nums.forEach((el, i) => {
+//         debugger
+//         if (el < nums[min]) {
+//             min = i;   
+//             debugger
+//         }
+//     })
+//     debugger
+//     sorted.push(nums.splice(min, 1)[0])
+//     debugger
+//     return sort(nums, sorted)
+// }
+
+console.log(sort([4,1,6,3,1,7])); // [1, 1, 3, 4, 6, 7]
+console.log(sort([0, 1, -3])); // [-3, 0, 1]
+console.log(sort([])); // []
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 module.exports = sort;
